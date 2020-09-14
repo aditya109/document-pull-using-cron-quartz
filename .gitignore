@@ -571,3 +571,5 @@ gradle-app.setting
 **/build/
 
 # End of https://www.toptal.com/developers/gitignore/api/python,pycharm,intellij,webstorm,java,node,react,go,maven,gradle
+.idea
+.settings
