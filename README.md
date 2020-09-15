@@ -1,10 +1,10 @@
-#Gist Updater
+# Gist Updater
 
 Application which runs a cron job every hour to pull a gist off Github.
 
 ##### Stack
-[X]   Java
-[X]   Maven
+<code><img height="45" src="https://cdn.svgporn.com/logos/java.svg" /></code>
+<code><img height="45" src="https://cdn.svgporn.com/logos/apache.svg" /></code>
 ###### Demonstrations:
 >   1.  How to HTTPRequest in Java
 >   2.  How to run a cron job in Java 
@@ -34,3 +34,4 @@ mvn clean install package
 
 java -jar target/document-pull-using-cron-quartz-1.0-SNAPSHOT.jar
 ```
+If you find this repo interesting, show some ❤ by starring this repo.
