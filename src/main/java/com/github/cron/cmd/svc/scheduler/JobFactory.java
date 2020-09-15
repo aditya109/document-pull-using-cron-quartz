@@ -26,6 +26,7 @@ public class JobFactory implements Job {
         Hashtable<String, Object> responseMap = null;
         try {
             responseMap = gitHandler.controller();
+            if (responseMap == null) return;
         } catch (IOException | ParseException e) {
             e.printStackTrace();
         }

@@ -27,7 +27,7 @@ public class GitHandler {
         GitHandler.responseMap = new Hashtable<String, Object>();
     }
 
-    public void requestHandler(String gitLink) throws IOException {
+    public boolean requestHandler(String gitLink) throws IOException {
         //  function to store response from HTTPRequest
         //  storing gistID from the `gitLink`
         String gistID = gitLink.split("/")[gitLink.split("/").length - 1];
@@ -35,7 +35,7 @@ public class GitHandler {
         //  creating URL object passing `GET_URL`
         URL url = new URL(GET_URL);
         inline = "";
-
+        boolean flag = false;
         //  creating `HttpURLConnection` object
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         //  setting request method in `HttpURLConnection` object
@@ -47,7 +47,8 @@ public class GitHandler {
         //  getting the response code
         int responseCode = connection.getResponseCode();
         if (responseCode != 200) {
-            throw new RuntimeException("HttpResponseCode : " + responseCode);
+            System.out.println("Http Response Code : " + responseCode);
+            flag = false;
         } else {
             //  creating `Scanner` object
             Scanner scanner = new Scanner(url.openStream());
@@ -55,12 +56,14 @@ public class GitHandler {
             while (scanner.hasNext()) {
                 inline += scanner.nextLine();
             }
+            flag = true;
             //  closing `Scanner` object
             scanner.close();
 
         }
         //  disconnecting the connection
         connection.disconnect();
+        return flag;
     }
 
     public void responseParser() throws ParseException {
@@ -87,11 +90,11 @@ public class GitHandler {
 
     public Hashtable<String, Object> controller() throws IOException, ParseException {
         //  call requestHandler() and store `response`
-        requestHandler(gitLink);
-        //  `response` is passed to responseParse()
-        responseParser();
-        //  returning `responseMap`
-        return responseMap;
-
+        if(requestHandler(gitLink)) {
+            //  `response` is passed to responseParse()
+            responseParser();
+            //  returning `responseMap`
+            return responseMap;
+        } else return null;
     }
 }

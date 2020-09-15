@@ -15,7 +15,8 @@ public class TaskScheduler {
             //  creating `Trigger` as a trigger
             Trigger trigger1 = TriggerBuilder.newTrigger()
                     .withIdentity("cronTrigger1", "group1")
-                    .withSchedule(CronScheduleBuilder.cronSchedule("0/5 * * * * ?"))
+//                    .withSchedule(CronScheduleBuilder.cronSchedule("0/5 * * * * ?"))
+                    .withSchedule(CronScheduleBuilder.cronSchedule("0 0 0/1 1/1 * ? *"))
                     .build();
             //  creating `Schedule` as a schedule
             Scheduler scheduler1 = new StdSchedulerFactory().getScheduler();
@@ -23,7 +24,7 @@ public class TaskScheduler {
             scheduler1.start();
             //  schedule `Job`
             scheduler1.scheduleJob(job1, trigger1);
-
+            System.out.println("Cron Job scheduled");
             Thread.sleep(100000);
             //  shutdown schedule
             scheduler1.shutdown();
